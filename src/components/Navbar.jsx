@@ -9,19 +9,17 @@ export default function Navbar() {
       </Link>
       <ul className='flex gap-2'>
         <li>
-          <Link
-            to='/login'
-            className='block rounded-xl bg-indigo-500 py-2 px-4'>
+          <Link to='/login' className='btn block bg-indigo-500'>
             Login
           </Link>
         </li>
         <li>
-          <Link to='/signup' className='block rounded-xl py-2 px-4'>
+          <Link to='/signup' className='btn block'>
             Signup
           </Link>
         </li>
         <li>
-          <button className='rounded-xl bg-red-500 py-2 px-4'>Logout</button>
+          <button className='btn bg-red-500'>Logout</button>
         </li>
       </ul>
     </div>
