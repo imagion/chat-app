@@ -2,7 +2,7 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 
 export default function Content() {
   return (
-    <div className='flex flex-col justify-end p-4 bg-neutral-100 flow-lg'>
+    <div className='flex flex-col justify-end p-4 flow-lg'>
       <div className='content-messages flex flex-col flow-sm'>
         <div className='mess grid bg-white rounded-full grid-flow-col justify-start shadow'>
           <img
