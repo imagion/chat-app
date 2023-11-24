@@ -1,6 +1,8 @@
-import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
+import ChatForm from './ChatForm'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export default function Content() {
+  const { user } = useAuthContext()
   return (
     <div className='flex flex-col justify-end p-4 flow-lg'>
       <div className='content-messages flex flex-col flow-sm'>
@@ -22,12 +24,7 @@ export default function Content() {
           <p className='content '>This is Major Tom to Ground Control</p>
         </div>
       </div>
-      <form className='flex gap-2'>
-        <input type='text' className='w-full p-2 rounded-xl shadow' />
-        <button type='submit' className='bg-indigo-500 p-2 rounded-xl '>
-          <PaperAirplaneIcon className='text-black w-7 h-w-7' />
-        </button>
-      </form>
+      <ChatForm uid={user.uid} />
     </div>
   )
 }
