@@ -24,10 +24,8 @@ export const useSignup = () => {
       // add displayName to user
       await updateProfile(auth.currentUser, { displayName })
 
-      // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
 
-      // update state
       if (!isCancelled) {
         setIsPending(false)
         setError(null)
