@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
+import { useLogout } from '../hooks/useLogout'
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline'
 
 export default function Navbar() {
+  const { logout } = useLogout()
+
   return (
     <div className='flex justify-between items-center bg-neutral-400 p-2'>
       <Link to='/'>
@@ -19,7 +22,9 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <button className='btn bg-red-500'>Logout</button>
+          <button className='btn bg-red-500' onClick={logout}>
+            Logout
+          </button>
         </li>
       </ul>
     </div>
