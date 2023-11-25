@@ -1,15 +1,38 @@
 import { useState } from 'react'
-import { useSignup } from '../hooks/useSignup'
+import { useSignup } from '../../hooks/useSignup'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
+  const [thumbnail, setThumbnail] = useState(null)
+  const [thumbnailError, setThumbnailError] = useState(null)
   const { error, isPending, signup } = useSignup()
 
   const handleSubmit = e => {
     e.preventDefault()
-    signup(email, password, displayName)
+    signup(email, password, displayName, thumbnail)
+  }
+
+  const handleFileChange = e => {
+    setThumbnail(null)
+    let selected = e.target.files[0]
+
+    if (!selected) {
+      setThumbnailError('Please select a file')
+      return
+    }
+    if (!selected.type.includes('image')) {
+      setThumbnailError('Selected file must be an image')
+      return
+    }
+    if (!selected.size > 100000) {
+      setThumbnailError('Image file size must be less than 100kb')
+      return
+    }
+
+    setThumbnailError(null)
+    setThumbnail(selected)
   }
 
   return (
@@ -44,6 +67,19 @@ export default function Login() {
           value={password}
         />
       </label>
+      <label className='block'>
+        <span>Thumbnail:</span>
+        <input
+          type='file'
+          className='w-full border border-neutral-400 rounded-lg p-2'
+          onChange={handleFileChange}
+        />
+        {thumbnailError && (
+          <div className='bg-red-100 text-red-900 p-2 rounded-lg'>
+            {thumbnailError}
+          </div>
+        )}
+      </label>
       {!isPending && (
         <button type='submit' className='btn bg-indigo-500'>
           Sign up
@@ -55,7 +91,7 @@ export default function Login() {
         </button>
       )}
       {error && (
-        <p className='bg-red-100 text-red-900 p-2 rounded-lg'>{error}</p>
+        <div className='bg-red-100 text-red-900 p-2 rounded-lg'>{error}</div>
       )}
     </form>
   )
