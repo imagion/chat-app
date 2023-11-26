@@ -4,7 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/react/24/outline'
 
 export default function Navbar() {
-  const { logout } = useLogout()
+  const { logout, isPending } = useLogout()
   const { user } = useAuthContext()
 
   return (
@@ -31,9 +31,19 @@ export default function Navbar() {
           <>
             <li>Hello, {user.displayName}</li>
             <li>
-              <button className='btn bg-red-500' onClick={logout}>
-                Logout
-              </button>
+              {!isPending && (
+                <button className='btn bg-red-500' onClick={logout}>
+                  Logout
+                </button>
+              )}
+              {isPending && (
+                <button
+                  className='btn bg-neutral-500'
+                  disabled
+                  onClick={logout}>
+                  Logging out...
+                </button>
+              )}
             </li>
           </>
         )}
