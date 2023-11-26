@@ -9,6 +9,9 @@
 }
 
 @layer utilities {
+  .chat.active {
+    @apply bg-neutral-100;
+  }
   .flow-lg {
     @apply [&>*+*]:mt-6;
   }

@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <div className='flex justify-between h-screen'>
-            <Sidebar />
+            {user && <Sidebar />}
             <Routes>
               <Route
                 path='/'
@@ -31,7 +31,7 @@ function App() {
                 element={!user ? <Signup /> : <Navigate to='/' />}
               />
             </Routes>
-            <Users />
+            {user && <Users />}
           </div>
         </BrowserRouter>
       )}
