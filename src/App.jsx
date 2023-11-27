@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Users from './components/Users'
 import Home from './pages/Home/Home'
+import ChatRoom from './pages/Home/ChatRoom'
 import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
 import { useAuthContext } from './hooks/useAuthContext'
@@ -21,6 +22,10 @@ function App() {
               <Route
                 path='/'
                 element={user ? <Home /> : <Navigate to='/login' />}
+              />
+              <Route
+                path='/chats/:id'
+                element={user ? <ChatRoom /> : <Navigate to='/login' />}
               />
               <Route
                 path='/login'
