@@ -1,11 +1,12 @@
-import { useCollection } from '../../hooks/useCollection'
+import { useParams } from 'react-router-dom'
 
 export default function MessagesList({ messages, user }) {
-  const { error, documents } = useCollection('users')
+  const { id } = useParams()
+  const filtered = messages.filter(message => message.chatRoom === id)
 
   return (
     <ul className='flex flex-col flow-sm'>
-      {messages.map(message => (
+      {filtered.map(message => (
         <li
           key={message.id}
           className='flex items-center bg-white rounded-full shadow'>

@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useAuthContext } from '../../hooks/useAuthContext'
 import { useFirestore } from '../../hooks/useFirestore'
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 
-export default function ChatForm({ uid }) {
+export default function ChatForm() {
   const [message, setMessage] = useState('')
-  const { addDocument, response } = useFirestore('chats')
+  const { id } = useParams()
+  const { user } = useAuthContext()
+  const { addDocument, response } = useFirestore('messages')
+
+  const createdBy = {
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    id: user.uid,
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
-    addDocument({ uid, message })
+    addDocument({ createdBy, message, chatRoom: id })
   }
 
   useEffect(() => {
